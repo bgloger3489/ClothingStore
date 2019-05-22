@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<!--Ben Gloger-->
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<title></title>
+		<style>
+			div#mainDiv{
+				width: 65%;
+				
+				margin: auto;
+				max-width: 850px;
+				background: white;
+				position: absolute;
+				left: 27%;
+				
+			}
+			
+			div > img{
+				width: 92%;	
+			}
+			
+			div#modalBackground{
+				display: none;
+				width: 100%;
+				height: 100%;
+				left:0px;
+				top:0px;
+				z-index: 1;
+				background-color: rgba(0,0,0,0.4);
+				position: fixed;
+				
+				
+				overflow: auto;
+			}
+			
+			div#modal{
+				margin: auto;
+				text-align: center;
+				background-color: white;
+				margin-top: 5%;
+				width: 45%;
+				padding: 20px;
+				
+			}
+			div#modal > div{
+				font: 20pt TimesNewRoman;
+				color: rgb(44,44,44);
+			}
+			div#modal > div > img{
+				width: 70%;
+			}
+			
+			span#Xclose{
+				float: left;
+				font-weight: bold;
+				color: grey;
+				font:25pt arial;
+			}
+			span#cart{
+				float: right;
+				position: relative;
+				top: 4.5px;
+				font-size: 1.6em;
+				color: grey;
+			}
+			
+			div#modal > span:hover{
+				color: black;
+				cursor: pointer;
+			}
+			
+			
+			
+			
+			
+			
+			
+			div.clothingDiv{
+				width: 50%;
+				text-align: center;
+				display: inline-block;
+				padding-left: 2%;
+				padding-right: 2%;
+				padding-bottom: 15px;
+				padding-top: 15px;
+				opacity: .95;
+			}
+			div.clothingDiv:hover{
+				background-color: white;
+				opacity: 1;
+				cursor: pointer;
+			}
+			
+			div.clothingDiv > span{
+				text-align: center;
+				background-color: white;
+				padding: 2px;
+				position:relative;
+				top:10px;
+				
+			}
+			
+			*{
+				background-color: f9f9f9;
+				
+			}
+			
+			
+			
+			
+			
+			
+			div#ItIsLit{
+				position: fixed;
+				z-index: -1;
+				transform: rotate(-20deg);
+				left: -5%;
+				top: -10%;
+				width: 100%;
+				
+				
+			}
+			div.line{
+				display: flex;
+			}
+			span.redSpan{
+				color: rgb(225,0,6);
+				font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+				font-size: 24pt;
+				background-color: pink;
+				padding-left: 5%;
+				display:inline-block;
+				opacity: .5;
+			}
+			span.lightSpan{
+				color: white;
+				font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+				font-size: 24pt;
+				background-color: pink;
+				padding-left: 5%;
+				display:inline-block;
+				opacity: .5;
+			}
+			span.greySpan{
+				color: black;
+				font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+				font-size: 24pt;
+				background-color: pink;
+				padding-left: 5%;
+				display:inline-block;
+				opacity: .5;
+			}
+			
+			
+			
+			span#title{
+				display: block;
+				width: 100%;
+				background-color: black;
+				font-family: Futura,"Trebuchet MS",Arial,sans-serif;
+				font-size: 48pt;
+				color: white;
+				text-align: center;
+				opacity: 1;
+			}
+			
+			div#menuBars{
+				float:left;
+				width: 20%;
+				height: 80%;
+			}
+			
+			div.noItems{
+				width: 100%
+				height: 100%
+			}
+			span#title:hover{
+				cursor: pointer;
+			}
+		</style>
+		<script>
+			function init(){
+				//lightBlue = new clothing('shirt', 'vneck', 'XS', 'red', '');
+				//alert(shirt1.name);
+				mainDisplays = document.getElementById('mainDiv');
+				modalBackground = document.getElementById('modalBackground');
+				clothingDisplays = document.getElementById('modal');
+				modalContent = document.getElementById('content');
+				//activeClothingDisplay = false;
+				currentModalClothing = '';
+				
+				cartSpan = document.getElementById('cart');
+				cart = [];
+				cartGreen = false;
+				
+				laceCami = new clothing('top', 'Lace Cami', 'shopWomen/lace cami.jpg');
+				blouse = new clothing('top', 'Blouse', 'shopWomen/blouse.jpg');
+				cardigan = new clothing('top', 'Cardigan', 'shopWomen/cardigan.jpg');
+				fringe = new clothing('acsesories', 'Fringe Necklace', 'shopWomen/fringe.jpg');
+				blackLace = new clothing('top', 'Black Lace', 'shopWomen/lace.jpg');
+				strippedSweater = new clothing('sweater', 'Stripped Sweater', 'shopWomen/stripped sweater.jpg');
+				plad = new clothing('top', 'Plad Shirt', 'shopWomen/plad.jpg');
+				whitePants = new clothing('pants', 'White Jeans', 'shopWomen/white pants.jpg');
+				trackSuit = new clothing('top', 'Track Suit', 'shopWomen/track suit.jpg');
+				bolo = new clothing('acsesories', 'Bolo Necklace', 'shopWomen/bolo.jpg');
+				denimShirt = new clothing('top', 'Denim Shirt', 'shopWomen/denim.jpg');
+				longSocks = new clothing('acsesories', 'Long Socks', 'shopWomen/long socks.jpg');
+				rippedJeans = new clothing('pants', 'Ripped Jeans', 'shopWomen/ripped jeans.jpg');
+				vneck = new clothing('top', 'Black Vneck', 'shopWomen/vneck.jpg');
+				blackJeans = new clothing('pants', 'Black Jeans', 'shopWomen/black jeans.jpg');
+				circle = new clothing('top', 'Black T-shirt', 'shopWomen/circle.jpg');
+				greySweater = new clothing('sweater', 'Textured Grey Sweater', 'shopWomen/textured sweater.jpg');
+				
+				allItemsArray = displayArray = [blackJeans, greySweater, circle, blouse, cardigan, fringe, blackLace, plad, whitePants, strippedSweater, trackSuit, bolo, denimShirt, laceCami, longSocks, rippedJeans, vneck];
+				
+				updateDisplay();
+				//alert(brownKahkies);
+				
+				
+				
+				//addcartbutton:
+				//document.innerHTML += "<button onclick = 'updateDisplay()'>view cart</button>"
+				
+			}
+			
+			function clothing(type, name, img, isInCart){
+				this.type = type;
+				
+				this.name = name;
+				
+				this.img = img;
+				//this.IMG = IMG;
+				this.isInCart = false;
+				
+			}
+			
+			function clothingPopUp(clothingIndex){
+				currentModalClothing = displayArray[clothingIndex];
+			
+				modalBackground.style.display = 'block';
+				modalContent.innerHTML = '<img src = ' + '"' + currentModalClothing.img + '"' + '/>' + '</br>' + '</br>' + '"' + currentModalClothing.name + '"';
+				//clothing Article represents the actual class instance
+				
+				
+				if(currentModalClothing.isInCart){
+					cartSpan.style.color = 'green';
+				}else{
+					cartSpan.style.color = 'grey';
+				}
+				//currentModalClothing = clothingArticle;
+				//alert(currentModalClothing.name);
+			}
+			
+			function backToMain(event){
+				
+				if(event.target == modalBackground || event.target == document.getElementById('Xclose')){
+				modalBackground.style.display = 'none';
+				//cartSpan.style.color = 'grey';
+				}
+			}
+			
+			function updateDisplay(){
+				mainDisplays.innerHTML = '';
+				
+				for(i = 0; i < displayArray.length; i++){
+				
+				mainDisplays.innerHTML += "<div class = 'clothingDiv'; onclick = 'clothingPopUp(" + i + ")'>" + '<img src = '+ '"' + displayArray[i].img + '"' + '/>' + "</br>" + "<span>" + displayArray[i].name + "</span>" + "</div>";
+					
+				}
+				if(displayArray == []){
+					mainDisplays.innerHTML = "There are no items in your cart";
+				}
+				//mainDisplays.innerHTML += '<button onclick = ' + 'clothingPopUp("grey VNeck.jpg")' + '>asdasd</button>';
+			}
+			
+			function addToCart(){
+				currentModalClothing.isInCart = !currentModalClothing.isInCart;
+				//alert(currentModalClothing.isInCart);
+				
+				if(currentModalClothing.isInCart){
+					cartSpan.style.color = 'green';
+					cart.push(currentModalClothing)
+				}else{
+					cartSpan.style.color = 'grey';
+					//transverse cart to see if its in there, if so delete it
+					
+					for(i = 0; i < cart.length; i++){
+						if(currentModalClothing == cart[i]){
+							cart.splice(i, 1);
+						}
+					}
+				}
+				cart[-1] = currentModalClothing;
+				//alert(cart);
+			}
+			
+			function changeDisplayArray(filterName){
+				displayArray = [];
+				
+				for(i = 0; i < allItemsArray.length; i++){
+					//look In a different section if your filtering by type or by isInCart
+					if(filterName == 'cart'){
+						if(allItemsArray[i].isInCart){
+							displayArray.push(allItemsArray[i]);
+						}
+					}else if(filterName == 'allItemsArray'){
+						displayArray.push(allItemsArray[i]);
+					}else{
+						if(filterName == allItemsArray[i].type){
+							displayArray.push(allItemsArray[i]);
+						}
+					}
+				}
+				
+				var but = document.getElementById('selectionButton');
+				if(filterName == 'cart'){
+					
+					but.innerHTML = 'Back To Store';
+					but.onclick = function(){changeDisplayArray("allItemsArray"); };
+				}else if(filterName == 'allItemsArray'){
+					but.innerHTML = 'View Cart';
+					but.onclick = function(){changeDisplayArray("cart"); };
+				}
+				
+				updateDisplay();
+			}
+			
+			function backToIndex(){
+				window.location = 'index.html';
+			}
+		</script>
+	</head>
+	<body onload = 'init()'>
+		<div id = 'ItIsLit'>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br>
+			<div class = 'line'>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+				<span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span><span class = 'redSpan'>It   </span><span class = 'lightSpan'>Is   </span><span class = 'greySpan'>lit   </span>
+			</div>
+			</br></br></br></br>
+			
+		</div>
+		
+		<span id = 'title' onclick = 'backToIndex()'>Guapo's:</span></br></br>
+		
+		<div id = 'menuBars'>
+			<button id = 'selectionButton' onclick = 'changeDisplayArray("cart")' class = "w3-btn">View Cart</button></br></br>
+			<button onclick = 'changeDisplayArray("allItemsArray")' class = "w3-btn w3-large w3-padding-large" style = 'width: 100%' style = 'height: 200px;'>  View All Items </button></br></br>
+			<button onclick = 'changeDisplayArray("top")' class = "w3-btn w3-large w3-padding-large" style = 'width: 100%' style = 'height: 200px;'>  View Tops </button></br></br>
+			<button onclick = 'changeDisplayArray("pants")' class = "w3-btn w3-large w3-padding-large" style = 'width: 100%'>  View Pants </button></br></br>
+			<button onclick = 'changeDisplayArray("sweater")' class = "w3-btn  w3-large w3-padding-large" style = 'width: 100%'>  View Sweaters </button></br></br>
+			<button onclick = 'changeDisplayArray("acsesories")' class = "w3-btn w3-large w3-padding-large" style = 'width: 100%'>  View Accessories </button></br></br>	
+		</div>
+		
+		<div id = 'mainDiv'></div>
+			
+		<div id = 'modalBackground'; onclick = 'backToMain(event)'>
+			<div id = 'modal'>
+				<span id = 'cart'; class = "glyphicon glyphicon-shopping-cart"; onclick = 'addToCart()'></span>
+				<span id = 'Xclose'; onclick = 'backToMain()'>&times;</span>
+				<div id = 'content'>fgyfghfhfhfgh</div>
+			</div>
+		</div>
+		
+		
+	</body>
+</html>
